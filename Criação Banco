@@ -1,0 +1,8 @@
+CREATE DATABASE IF NOT EXISTS treinamento;
+USE treinamento;
+CREATE TABLE IF NOT EXISTS Aluno 
+( 
+ cod_aluno INT PRIMARY KEY AUTO_INCREMENT,  
+ nome_completo VARCHAR(125) NOT NULL,  
+ serie INT 
+); 
