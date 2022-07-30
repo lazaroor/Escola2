@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Escola2
 {
-    internal class Aluno : INotifyPropertyChanged
+    [Table("aluno")]
+    public class Aluno : INotifyPropertyChanged
     {
         private string nomeCompleto;
         private int codAluno;
@@ -15,9 +18,7 @@ namespace Escola2
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Aluno()
-        {
-        }
+        public Aluno(){ }
 
         public Aluno(string nomeCompleto, int codAluno, Ano serie)
         {
@@ -25,8 +26,6 @@ namespace Escola2
             this.codAluno = codAluno;
             this.serie = serie;
         }
-
-        //O que falta aqui? gets e setters
         public string NomeCompleto
         {
             get { return nomeCompleto; }
@@ -35,6 +34,7 @@ namespace Escola2
                 Notifica("NomeCompleto");
               }
         }
+        [Key()]
         public int CodAluno
         {
             get { return codAluno; }
@@ -42,7 +42,6 @@ namespace Escola2
                 Notifica("CodAluno");
             }
         }
-
         public Ano Serie
         {
             get { return serie; }

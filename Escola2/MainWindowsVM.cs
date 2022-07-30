@@ -18,6 +18,8 @@ namespace Escola2
         public ICommand AtualizaAluno { get; private set; }
         public Aluno AlunoSelecionado { get; set; }
         public bool IsValueType { get; }
+
+        EscolaModel db = new EscolaModel();
         public MainWindowsVM()
         {
             listaAlunos = new ObservableCollection<Aluno>() {
@@ -57,6 +59,18 @@ namespace Escola2
                 {
                     if(validateUserEntry(novoAluno)) {
                         listaAlunos.Add(novoAluno);
+                        try
+                        {
+                            db.Database.Connection.Open();
+                            Ano serie = novoAluno.Serie;
+                            Ano teste = serie;
+                            int sql = db.Database.ExecuteSqlCommand($"insert into \"Escola\".aluno (\"nomeCompleto\", serie) VALUES ('Batata', {novoAluno.Serie});");
+                            db.Database.Connection.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                     }
                 }
                
