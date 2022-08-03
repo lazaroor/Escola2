@@ -4,16 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Escola2"
+        xmlns:local2="clr-namespace:Escola2"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="TelaApoio" Height="303" Width="297">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="dataEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local2:Ano" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="92,57,0,0" TextWrapping="Wrap" Text="{Binding NomeCompleto}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="92,120,0,0" TextWrapping="Wrap" Text="{Binding CodAluno}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="92,181,0,0" TextWrapping="Wrap" Text="{Binding Serie}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Salvar" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Click="btnSalvar" Width="43"/>
-        <Label Content="Nome" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top"/>
-        <Label Content="Código" HorizontalAlignment="Left" Margin="133,94,0,0" VerticalAlignment="Top"/>
-        <Label Content="Série" HorizontalAlignment="Left" Margin="133,155,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,98,0,0" TextWrapping="Wrap" Text="{Binding NomeCompleto}" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="ComboSerie" ItemsSource="{Binding Source={StaticResource dataEnum}}" SelectedItem="{Binding Serie}" HorizontalAlignment="Center" Margin="0,149,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Salvar" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" Click="btnSalvar" Width="42"/>
+        <Label Content="Nome" HorizontalAlignment="Left" Margin="124,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Série" HorizontalAlignment="Center" Margin="0,118,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

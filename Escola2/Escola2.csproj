@@ -184,9 +184,13 @@
     <Compile Include="MessageBoxError.xaml.cs">
       <DependentUpon>MessageBoxError.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EscolaModel.cs" />
+    <Compile Include="EscolaContext.cs" />
+    <Compile Include="ModelEscola.cs" />
     <Compile Include="TelaApoio.xaml.cs">
       <DependentUpon>TelaApoio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TelaUpdate.xaml.cs">
+      <DependentUpon>TelaUpdate.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -208,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TelaApoio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TelaUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,6 +258,10 @@
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
     <Content Include="mongocrypt.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />

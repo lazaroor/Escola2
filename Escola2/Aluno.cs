@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,23 +10,33 @@ using System.Threading.Tasks;
 
 namespace Escola2
 {
-    [Table("aluno")]
-    public class Aluno : INotifyPropertyChanged
+    [Table("aluno", Schema = "Escola")]
+    public class Aluno : INotifyPropertyChanged, INotifyCollectionChanged
     {
-        private string nomeCompleto;
         private int codAluno;
+        private string nomeCompleto;
         private Ano serie;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         public Aluno(){ }
 
-        public Aluno(string nomeCompleto, int codAluno, Ano serie)
+        public Aluno(string nomecompleto, int codaluno, Ano serie)
         {
-            this.nomeCompleto = nomeCompleto;
-            this.codAluno = codAluno;
+            this.codAluno = codaluno;
+            this.nomeCompleto = nomecompleto;
             this.serie = serie;
         }
+        [Key(), Column("codaluno")]
+        public int CodAluno
+        {
+            get { return codAluno; }
+            set { codAluno = value;
+                Notifica("CodAluno");
+            }
+        }
+        [Column("nomecompleto")]
         public string NomeCompleto
         {
             get { return nomeCompleto; }
@@ -34,14 +45,7 @@ namespace Escola2
                 Notifica("NomeCompleto");
               }
         }
-        [Key()]
-        public int CodAluno
-        {
-            get { return codAluno; }
-            set { codAluno = value;
-                Notifica("CodAluno");
-            }
-        }
+        [Column("serie")]
         public Ano Serie
         {
             get { return serie; }
@@ -50,11 +54,21 @@ namespace Escola2
             }
         }
 
+        public List<Aluno> Todos()
+        {
+            var db = new EscolaContext();
+            return db.Alunos.ToList();
+        }
+
         public void Notifica(string propertyName)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+            if(CollectionChanged != null)
+            {
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 

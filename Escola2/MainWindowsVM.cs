@@ -19,17 +19,10 @@ namespace Escola2
         public Aluno AlunoSelecionado { get; set; }
         public bool IsValueType { get; }
 
-        EscolaModel db = new EscolaModel();
+        ModelEscola db = new ModelEscola();
         public MainWindowsVM()
         {
-            listaAlunos = new ObservableCollection<Aluno>() {
-                new Aluno()
-                {
-                    NomeCompleto = "Lazaro Ramos",
-                    CodAluno = 3,
-                    Serie = (Ano)2
-                }
-            };
+            listaAlunos = new ObservableCollection<Aluno>(db.GetAlunos());
             IniciaComandos();
         }
 
@@ -58,43 +51,47 @@ namespace Escola2
                 if(janela.DialogResult == true)
                 {
                     if(validateUserEntry(novoAluno)) {
-                        listaAlunos.Add(novoAluno);
-                        try
-                        {
-                            db.Database.Connection.Open();
-                            Ano serie = novoAluno.Serie;
-                            Ano teste = serie;
-                            int sql = db.Database.ExecuteSqlCommand($"insert into \"Escola\".aluno (\"nomeCompleto\", serie) VALUES ('Batata', {novoAluno.Serie});");
-                            db.Database.Connection.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
+                        List<Aluno> alunoCriado = db.CreateAluno(novoAluno);
+                        listaAlunos.Add(alunoCriado[0]);
                     }
                 }
                
             });
             RemoveAluno = new RelayCommand((object _) =>
             {
-                listaAlunos.Remove(AlunoSelecionado);
+                try
+                {
+                    db.RemoveAluno(AlunoSelecionado.CodAluno);
+                    listaAlunos.Remove(AlunoSelecionado);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }, (object _) =>
             {
                 return AlunoSelecionado != null;
             });
             AtualizaAluno = new RelayCommand((object _) =>
             {
-                Aluno alunoAtualizado = new Aluno(AlunoSelecionado.NomeCompleto, AlunoSelecionado.CodAluno, AlunoSelecionado.Serie);
-                TelaApoio janela = new TelaApoio();
-
+                Aluno alunoAtualizado = new Aluno(AlunoSelecionado.NomeCompleto, AlunoSelecionado.CodAluno, (Ano)AlunoSelecionado.Serie);
+                TelaUpdate janela = new TelaUpdate();
                 janela.DataContext = alunoAtualizado;
                 janela.ShowDialog();
                if (janela.DialogResult == true && validateUserEntry(alunoAtualizado))
+                {
+                    try
                     {
+                        db.UpdateAluno(alunoAtualizado.NomeCompleto, alunoAtualizado.Serie, alunoAtualizado.CodAluno);
                         AlunoSelecionado.NomeCompleto = alunoAtualizado.NomeCompleto;
                         AlunoSelecionado.CodAluno = alunoAtualizado.CodAluno;
                         AlunoSelecionado.Serie= alunoAtualizado.Serie;
+                    } 
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
                     }
+                }
                 }, (object _) =>
                 {
                     return AlunoSelecionado != null;

@@ -15,19 +15,22 @@ using System.Windows.Shapes;
 namespace Escola2
 {
     /// <summary>
-    /// Lógica interna para TelaApoio.xaml
+    /// Lógica interna para TelaUpdate.xaml
     /// </summary>
-    public partial class TelaApoio : Window
+    public partial class TelaUpdate : Window
     {
-        public TelaApoio()
+        public TelaUpdate()
         {
             InitializeComponent();
             ComboSerie.ItemsSource = Enum.GetValues(typeof(Ano)).Cast<Ano>();
         }
-
         public void btnSalvar(object sender, RoutedEventArgs e)
         {
+            // criar validação para o texto e alterar valor do dialogresult com base nisso
+            // alterar para combobox o textbox da serie
+            // MessageBox.Show(serie.Text);
             DialogResult = true;
+            // serie.Items.Add("1");
         }
     }
 }
