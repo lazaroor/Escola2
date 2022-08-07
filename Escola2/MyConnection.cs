@@ -23,6 +23,15 @@ namespace Escola2
             try
             {
                 mConn.Open();
+                MySqlCommand mySqlCommand = new MySqlCommand("SELECT * FROM sys.aluno", mConn);
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                if (mySqlDataReader.HasRows)
+                {
+                    while (mySqlDataReader.Read())
+                    {
+                        Console.WriteLine(mySqlDataReader["0"].ToString());
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -32,23 +41,34 @@ namespace Escola2
             {
                 mConn.Close();
             }
+            throw new Exception();
         }
 
         public List<Aluno> GetAlunos()
         {
-            mySqlCommand.CommandText = "SELECT * FROM sys.aluno";
             try
             {
                 mConn.Open();
+                MySqlCommand mySqlCommand = new MySqlCommand("SELECT * FROM sys.aluno", mConn);
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+
+                while (mySqlDataReader.Read())
+                {
+                    // Cada linha da tabela retorna um array onde cada coluna é um índice desse array, no caso da tabela aluno o array vai de 0 a 2 
+                    // (int)mySqlDataReader[0], mySqlDataReader[1].ToString(), (Ano)(int)mySqlDataReader[2].ToString()
+                    Console.WriteLine(mySqlDataReader["codaluno"].ToString(), mySqlDataReader["nomecompleto"].ToString(), mySqlDataReader["serie"].ToString());
+                }
+                
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
             finally
             {
                 mConn.Close();
             }
+            throw new Exception();
         }
 
         public int RemoveAluno(int codAluno)
