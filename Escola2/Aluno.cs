@@ -56,7 +56,7 @@ namespace Escola2
 
         public List<Aluno> Todos()
         {
-            var db = new EscolaContext();
+            var db = new pgContext();
             return db.Alunos.ToList();
         }
 

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Escola2
 {
-    public class EscolaContext:DbContext
+    //pgContext
+    public class pgContext:DbContext
     {
-        public EscolaContext() : base("postgres") { }
+        public pgContext() : base("postgres") { }
         // public DbSet<Aluno> Alunos => Set<Aluno>();
         public DbSet<Aluno> Alunos { get; set; }
-
     }
 }

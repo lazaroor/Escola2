@@ -18,10 +18,11 @@ namespace Escola2
         public ICommand AtualizaAluno { get; private set; }
         public Aluno AlunoSelecionado { get; set; }
         public bool IsValueType { get; }
+        private GerenciadorBD db;
 
-        ModelEscola db = new ModelEscola();
         public MainWindowsVM()
         {
+            db = new GerenciadorBD("postgres");
             listaAlunos = new ObservableCollection<Aluno>(db.GetAlunos());
             IniciaComandos();
         }

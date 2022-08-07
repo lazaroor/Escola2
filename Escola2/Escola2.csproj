@@ -212,11 +212,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Ano.cs" />
+    <Compile Include="GerenciadorBD.cs" />
+    <Compile Include="IDb.cs" />
     <Compile Include="MessageBoxError.xaml.cs">
       <DependentUpon>MessageBoxError.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EscolaContext.cs" />
-    <Compile Include="ModelEscola.cs" />
+    <Compile Include="pgContext.cs" />
+    <Compile Include="pgConnection.cs" />
+    <Compile Include="MyConnection.cs" />
+    <Compile Include="MysqlContext.cs" />
     <Compile Include="TelaApoio.xaml.cs">
       <DependentUpon>TelaApoio.xaml</DependentUpon>
     </Compile>

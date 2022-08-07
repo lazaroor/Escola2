@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Escola2
 {
-    public class ModelEscola
+    // pgConnection
+    public class pgConnection : IDb
     {
-        public ModelEscola()
+        private pgContext db;
+        public pgConnection()
         {
-
-        }
-
-        EscolaContext db = new EscolaContext();
+            db = new pgContext();
+        }      
 
         public List<Aluno> GetAlunos()
         {
