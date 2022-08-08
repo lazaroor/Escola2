@@ -22,7 +22,7 @@ namespace Escola2
 
         public MainWindowsVM()
         {
-            db = new GerenciadorBD("mysql");
+            db = new GerenciadorBD("postgres");
             listaAlunos = new ObservableCollection<Aluno>(db.GetAlunos());
             IniciaComandos();
         }

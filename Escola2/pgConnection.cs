@@ -24,7 +24,7 @@ namespace Escola2
         {
             try
             {
-                List<Aluno> novoAdicionado = db.Alunos.SqlQuery("insert into \"Escola\".aluno (nomecompleto, serie) VALUES ({0}, {1}) RETURNING *;", novoAluno.NomeCompleto, (int)novoAluno.Serie).ToList();
+                List<Aluno> novoAdicionado = db.Alunos.SqlQuery("insert into \"Escola\".aluno (nomeCompleto, serie) VALUES ({0}, {1}) RETURNING *;", novoAluno.NomeCompleto, (int)novoAluno.Serie).ToList();
                 return novoAdicionado;
             }
             catch (Exception ex)
