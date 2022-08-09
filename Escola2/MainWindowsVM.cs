@@ -22,7 +22,7 @@ namespace Escola2
 
         public MainWindowsVM()
         {
-            db = new GerenciadorBD("postgres");
+            db = new GerenciadorBD("mysql");
             listaAlunos = new ObservableCollection<Aluno>(db.GetAlunos());
             IniciaComandos();
         }
@@ -52,8 +52,8 @@ namespace Escola2
                 if(janela.DialogResult == true)
                 {
                     if(validateUserEntry(novoAluno)) {
-                        List<Aluno> alunoCriado = db.CreateAluno(novoAluno);
-                        listaAlunos.Add(alunoCriado[0]);
+                        db.CreateAluno(novoAluno);
+                        listaAlunos.Add(novoAluno);
                     }
                 }
                

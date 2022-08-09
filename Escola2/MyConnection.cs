@@ -13,28 +13,21 @@ namespace Escola2
         Aluno aluno { get; set; }
         private MySqlConnection mConn;
         private MySqlCommand mySqlCommand;
-        private int lastId;
         public MyConnection()
         {
             mConn = new MySqlConnection("Persist Security Info=False; server=localhost;port=3307;database=sys;uid=root;server=localhost;database=sys;uid=root;pwd=123");
             mySqlCommand = new MySqlCommand();
             mySqlCommand.Connection = mConn;
-            lastId = 0;
         }
 
-        public List<Aluno> CreateAluno(Aluno novoAluno)
+        public void CreateAluno(Aluno novoAluno)
         {
             try
             {
                 mConn.Open();
-                MySqlCommand mySqlCommand = new MySqlCommand();
-                mySqlCommand.Connection = mConn;
                 mySqlCommand.CommandText = $"INSERT INTO sys.aluno SET nomecompleto = \"{novoAluno.NomeCompleto}\", serie = {(int)novoAluno.Serie};";
                 mySqlCommand.ExecuteNonQuery();
-                List<Aluno> listaAluno = new List<Aluno>();
-                aluno = new Aluno(novoAluno.NomeCompleto, (int)mySqlCommand.LastInsertedId, novoAluno.Serie);
-                listaAluno.Add(aluno);
-                return listaAluno;
+                novoAluno.CodAluno = (int)mySqlCommand.LastInsertedId;
             }
             catch (Exception ex)
             {

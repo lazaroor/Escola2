@@ -30,9 +30,9 @@ namespace Escola2
             return db.GetAlunos();
         }
 
-        public List<Aluno> CreateAluno(Aluno novoALuno)
+        public void CreateAluno(Aluno novoALuno)
         {
-            return db.CreateAluno(novoALuno);
+            db.CreateAluno(novoALuno);
         }
 
         public int RemoveAluno(int codAluno)

@@ -9,7 +9,7 @@ namespace Escola2
     public interface IDb
     {
         List<Aluno> GetAlunos();
-        List<Aluno> CreateAluno(Aluno novoAluno);
+        void CreateAluno(Aluno novoAluno);
         int RemoveAluno(int codAluno);
         int UpdateAluno(string nomeAluno, Ano serieAluno, int codAluno);
 

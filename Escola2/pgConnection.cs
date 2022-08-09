@@ -20,18 +20,17 @@ namespace Escola2
             return db.Alunos.OrderBy(aluno => aluno.CodAluno).ToList();
         }
 
-        public List<Aluno> CreateAluno(Aluno novoAluno)
+        public void CreateAluno(Aluno novoAluno)
         {
             try
             {
                 List<Aluno> novoAdicionado = db.Alunos.SqlQuery("insert into \"Escola\".aluno (nomeCompleto, serie) VALUES ({0}, {1}) RETURNING *;", novoAluno.NomeCompleto, (int)novoAluno.Serie).ToList();
-                return novoAdicionado;
+                novoAluno.CodAluno = novoAdicionado[0].CodAluno;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            return null;
         }
         
         public int RemoveAluno(int codAluno)
