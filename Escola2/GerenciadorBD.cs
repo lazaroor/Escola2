@@ -6,22 +6,26 @@ using System.Threading.Tasks;
 
 namespace Escola2
 {
-    public class GerenciadorBD
+    public class GerenciadorBD : ITipoBD
     {
-
         private IDb db;
         public GerenciadorBD(string nomeDb)
         {
-            if(nomeDb == "postgres")
+            db = TipoDb(nomeDb);
+        }
+        public IDb TipoDb(string nomeDb)
+        {
+            if (nomeDb == "postgres")
             {
-                db = new pgConnection();
-            } else if (nomeDb == "mysql")
+                return new pgConnection();
+            }
+            else if (nomeDb == "mysql")
             {
-                db = new MyConnection();
+                return new MyConnection();
             }
             else
             {
-                db = null;
+                return null;
             }
         }
 
@@ -32,7 +36,14 @@ namespace Escola2
 
         public void CreateAluno(Aluno novoALuno)
         {
-            db.CreateAluno(novoALuno);
+            try
+            {
+                db.CreateAluno(novoALuno);
+            } catch (Exception ex)
+            {
+                MessageBoxError janelaValidacao = new MessageBoxError();
+                janelaValidacao.ShowDialog();
+            }
         }
 
         public int RemoveAluno(int codAluno)
@@ -44,5 +55,10 @@ namespace Escola2
         {
             return db.UpdateAluno(nomeAluno, serieAluno, codAluno);
         }
+
+        //public Aluno CapturaAlunoPorCodigo(int codAluno)
+        //{
+          //  return db.CapturaAlunoPorCodigo(codAluno);
+        //}
     }
 }

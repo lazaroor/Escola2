@@ -43,5 +43,10 @@ namespace Escola2
             return db.Database.ExecuteSqlCommand("UPDATE \"Escola\".aluno SET nomecompleto = {0}, serie = {1} WHERE codaluno ={2}",
                            nomeAluno, (int)serieAluno, codAluno);
         }
+
+        //public Aluno CapturaAlunoPorCodigo(int codAluno)
+        //{
+        //    return db.Database.ExecuteSqlCommand("SELECT * FROM \"Escola\".aluno WHERE codaluno = {0}", codAluno);
+        //}
     }
 }

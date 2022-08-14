@@ -13,5 +13,7 @@ namespace Escola2
         int RemoveAluno(int codAluno);
         int UpdateAluno(string nomeAluno, Ano serieAluno, int codAluno);
 
+        //Aluno CapturaAlunoPorCodigo(int codAluno);
+
     }
 }

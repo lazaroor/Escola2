@@ -214,6 +214,7 @@
     <Compile Include="Ano.cs" />
     <Compile Include="GerenciadorBD.cs" />
     <Compile Include="IDb.cs" />
+    <Compile Include="ITipoBD.cs" />
     <Compile Include="MessageBoxError.xaml.cs">
       <DependentUpon>MessageBoxError.xaml</DependentUpon>
     </Compile>

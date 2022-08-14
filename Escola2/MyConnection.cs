@@ -103,7 +103,31 @@ namespace Escola2
             {
                 mConn.Close();
             }
-            throw new NotImplementedException();
+        }
+
+        public Aluno CapturaAlunoPorCodigo(int codAluno)
+        {
+            try
+            {
+                mConn.Open();
+                string query = $"SELECT * FROM sys.aluno WHERE codaluno = {codAluno}";
+                mySqlCommand.CommandText = query;
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    aluno = new Aluno(mySqlDataReader["nomecompleto"].ToString(), (int)mySqlDataReader["codaluno"], (Ano)(int)mySqlDataReader["serie"]);
+                    listaAlunos.Add(aluno);
+                }
+                return aluno;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                mConn.Close();
+            }
         }
     }
 }
