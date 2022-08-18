@@ -19,9 +19,11 @@ namespace Escola2
     /// </summary>
     public partial class MessageBoxError : Window
     {
-        public MessageBoxError()
+        public MessageBoxError(string errorMessage, string boxName)
         {
             InitializeComponent();
+            MessageBox.Show(errorMessage, boxName);
         }
+
     }
 }

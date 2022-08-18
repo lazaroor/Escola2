@@ -3,13 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Escola2"
+        xmlns:local="clr-namespace:Escola2" d:DataContext="{d:DesignInstance Type=local:Aluno}"
         mc:Ignorable="d"
         Title="MessageBoxError" Height="235" Width="343">
     <Grid Height="218" VerticalAlignment="Top">
-        <Label Content="Você preencheu incorretamente algum &#xD;&#xA;campo.&#xD;&#xA;" Margin="54,19,20,136"/>
-        <Label Content="O Campo NOME deve possuir somente&#xA;texto, sem números.&#xA;" Margin="54,59,20,96"/>
-        <Label Content="E o campo SÉRIE aceita somente números&#xA;de 1 a 11.&#xA;" Margin="54,109,14,46"/>
+        <Label Content="{Binding errorMessage}" Margin="54,59,20,96"/>
 
     </Grid>
 </Window>

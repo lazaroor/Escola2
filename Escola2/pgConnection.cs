@@ -44,9 +44,9 @@ namespace Escola2
                            nomeAluno, (int)serieAluno, codAluno);
         }
 
-        //public Aluno CapturaAlunoPorCodigo(int codAluno)
-        //{
-        //    return db.Database.ExecuteSqlCommand("SELECT * FROM \"Escola\".aluno WHERE codaluno = {0}", codAluno);
-        //}
+        public Aluno CapturaAlunoPorCodigo(int codAluno)
+        {
+            return db.Alunos.Find(codAluno);
+        }
     }
 }

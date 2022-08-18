@@ -22,7 +22,7 @@ namespace Escola2
 
         public MainWindowsVM()
         {
-            db = new GerenciadorBD("mysql");
+            db = new GerenciadorBD(new MyConnection());
             listaAlunos = new ObservableCollection<Aluno>(db.GetAlunos());
             IniciaComandos();
         }
@@ -36,8 +36,9 @@ namespace Escola2
             {
                 return true;
             }
-            MessageBoxError janelaValidacao = new MessageBoxError();
-            janelaValidacao.ShowDialog();
+            MessageBoxError janelaValidacao = new MessageBoxError("Você inseriu algum dado inválido.\n" +
+                "Para o campo nome somente é aceito valores sem números.", "Nome inválido");
+            
             return false;
         }
         
