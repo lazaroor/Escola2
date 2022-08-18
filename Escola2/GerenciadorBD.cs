@@ -6,27 +6,12 @@ using System.Threading.Tasks;
 
 namespace Escola2
 {
-    public class GerenciadorBD : ITipoBD
+    public class GerenciadorBD
     {
         private IDb db;
-        public GerenciadorBD(string nomeDb)
+        public GerenciadorBD(IDb db)
         {
-            db = TipoDb(nomeDb);
-        }
-        public IDb TipoDb(string nomeDb)
-        {
-            if (nomeDb == "postgres")
-            {
-                return new pgConnection();
-            }
-            else if (nomeDb == "mysql")
-            {
-                return new MyConnection();
-            }
-            else
-            {
-                return null;
-            }
+            this.db = db;
         }
 
         public List<Aluno> GetAlunos()
@@ -41,7 +26,7 @@ namespace Escola2
                 db.CreateAluno(novoALuno);
             } catch (Exception ex)
             {
-                MessageBoxError janelaValidacao = new MessageBoxError();
+                MessageBoxError janelaValidacao = new MessageBoxError("Opaaaa", "Banco fora do ar");
                 janelaValidacao.ShowDialog();
             }
         }
@@ -56,9 +41,9 @@ namespace Escola2
             return db.UpdateAluno(nomeAluno, serieAluno, codAluno);
         }
 
-        //public Aluno CapturaAlunoPorCodigo(int codAluno)
-        //{
-          //  return db.CapturaAlunoPorCodigo(codAluno);
-        //}
+        public Aluno CapturaAlunoPorCodigo(int codAluno)
+        {
+            return db.CapturaAlunoPorCodigo(codAluno);
+        }
     }
 }

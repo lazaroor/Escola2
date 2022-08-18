@@ -110,13 +110,13 @@ namespace Escola2
             try
             {
                 mConn.Open();
+                aluno = null;
                 string query = $"SELECT * FROM sys.aluno WHERE codaluno = {codAluno}";
                 mySqlCommand.CommandText = query;
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
                 {
                     aluno = new Aluno(mySqlDataReader["nomecompleto"].ToString(), (int)mySqlDataReader["codaluno"], (Ano)(int)mySqlDataReader["serie"]);
-                    listaAlunos.Add(aluno);
                 }
                 return aluno;
             }
